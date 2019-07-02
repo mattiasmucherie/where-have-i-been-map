@@ -1,49 +1,15 @@
 import React from "react";
 import "./App.css";
-import BasicMap from "./components/BasicMap";
+import Map from "./components/Map";
 import withFirebaseAuth from "react-with-firebase-auth";
 import * as firebase from "firebase/app";
+
 import "firebase/auth";
-import firebaseConfig from "./firebaseConfig";
-
-const firebaseApp = firebase.initializeApp(firebaseConfig);
-
-const listOfCountries = [
-  "Sweden",
-  "France",
-  "United Kingdom",
-  "Canada",
-  "Djibouti",
-  "Australia",
-  "Italy",
-  "United States",
-  "Mexico",
-  "Brazil",
-  "Norway",
-  "Finland",
-  "Belgium",
-  "Netherlands",
-  "Germany",
-  "Morocco",
-  "Egypt",
-  "Croatia",
-  "Spain",
-  "Portugal",
-  "Switzerland",
-  "Austria",
-  "Greece",
-  "Japan",
-  "Hong Kong",
-  "Malaysia",
-  "Singapore",
-  "Bosnia and Herz.",
-  "Dominican Rep."
-];
+import firebaseApp from "./firebaseConfig";
 
 class App extends React.Component {
   render() {
     const { user, signOut, signInWithGoogle } = this.props;
-    console.log(user);
     return (
       <div className="App">
         {user ? <p>Hello {user.displayName}</p> : <p>Please sign in</p>}
@@ -52,7 +18,7 @@ class App extends React.Component {
         ) : (
           <button onClick={signInWithGoogle}>Sign in with Google</button>
         )}
-        <BasicMap countries={listOfCountries} />
+        {user ? <Map uid={user.uid} /> : <p>Loading</p>}
       </div>
     );
   }

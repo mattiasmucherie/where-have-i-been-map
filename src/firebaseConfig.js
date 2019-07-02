@@ -1,4 +1,8 @@
-var firebaseConfig = {
+import firebase from "firebase/app";
+import "firebase/firestore";
+import "firebase/auth";
+
+const firebaseConfig = {
   apiKey: "AIzaSyD3AhJV9W0pX-4v-B3eZXKJLPcxDDxJDc0",
   authDomain: "where-have-i-been-map.firebaseapp.com",
   databaseURL: "https://where-have-i-been-map.firebaseio.com",
@@ -7,6 +11,8 @@ var firebaseConfig = {
   messagingSenderId: "297791553368",
   appId: "1:297791553368:web:1f06f7c263609e5c"
 };
-// Initialize Firebase
 
-export default firebaseConfig;
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+firebase.firestore();
+export default firebase;
