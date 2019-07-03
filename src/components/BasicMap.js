@@ -13,12 +13,28 @@ const wrapperStyles = {
 };
 
 class BasicMap extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      countries: props.countries
+    };
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.countries.length !== prevProps.countries.length) {
+      this.setState({ countries: this.props.countries });
+    }
+  }
+
   handleClick(geography, evt) {
     console.log("Geography data: ", geography);
   }
   render() {
-    return (
-      <div style={wrapperStyles}>
+    console.log("render", this.state.countries);
+
+    let map = null;
+    if (this.state.countries.length !== 0) {
+      map = (
         <ComposableMap
           projectionConfig={{
             scale: 205,
@@ -36,7 +52,7 @@ class BasicMap extends Component {
               {(geographies, projection) =>
                 geographies.map(
                   (geography, i) =>
-                    this.props.countries.indexOf(geography.properties.name) !==
+                    this.state.countries.indexOf(geography.properties.name) !==
                       -1 && (
                       <Geography
                         key={i}
@@ -70,8 +86,9 @@ class BasicMap extends Component {
             </Geographies>
           </ZoomableGroup>
         </ComposableMap>
-      </div>
-    );
+      );
+    }
+    return <div style={wrapperStyles}>{map}</div>;
   }
 }
 

@@ -5,7 +5,7 @@ import withFirebaseAuth from "react-with-firebase-auth";
 import * as firebase from "firebase/app";
 
 import "firebase/auth";
-import firebaseApp from "./firebaseConfig";
+import firebaseApp from "./firebase/index";
 
 class App extends React.Component {
   render() {
@@ -18,7 +18,7 @@ class App extends React.Component {
         ) : (
           <button onClick={signInWithGoogle}>Sign in with Google</button>
         )}
-        {user ? <Map uid={user.uid} /> : <p>Loading</p>}
+        {user ? <Map uid={user.uid} /> : <p>Loading User</p>}
       </div>
     );
   }
